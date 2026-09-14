@@ -88,13 +88,15 @@
         .marquee-container {
             overflow: hidden;
             width: 100%;
-            mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+            max-width: 100vw;
+            mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
         }
         .marquee-track {
             display: flex;
             width: max-content;
             animation: scroll-logos 25s linear infinite;
+            will-change: transform;
         }
         .marquee-track:hover {
             animation-play-state: paused;
@@ -104,24 +106,55 @@
             100% { transform: translateX(-50%); }
         }
         .client-logo-img {
-            height: 48px;
+            height: 40px;
             width: auto;
-            max-width: 150px;
+            max-width: 120px;
             object-fit: contain;
             filter: none !important;
             opacity: 1 !important;
             transition: transform 0.3s ease;
         }
         .client-logo-img:hover {
-            transform: scale(1.1);
+            transform: scale(1.08);
         }
         .logo-item {
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0 1.75rem;
-            height: 4.5rem;
+            padding: 0 1rem;
+            height: 3.5rem;
+        }
+        @media (min-width: 640px) {
+            .client-logo-img {
+                height: 48px;
+                max-width: 150px;
+            }
+            .logo-item {
+                padding: 0 1.75rem;
+                height: 4.5rem;
+            }
+        }
+        /* Mobile typography & spacing fixes */
+        @media (max-width: 639px) {
+            .hero-title {
+                font-size: 2.5rem !important;
+                line-height: 1.15 !important;
+            }
+            .hero-desc {
+                font-size: 0.95rem !important;
+                padding-left: 0.25rem;
+                padding-right: 0.25rem;
+            }
+            .availability-badge {
+                font-size: 0.7rem !important;
+                padding-left: 0.75rem !important;
+                padding-right: 0.75rem !important;
+                max-width: 95%;
+                white-space: normal;
+                text-align: center;
+                line-height: 1.35;
+            }
         }
         #particles-canvas {
             position: absolute;
@@ -142,10 +175,10 @@
         }
     </style>
 </head>
-<body class="font-sans text-gray-700 antialiased overflow-x-hidden bg-white">
+<body class="font-sans text-gray-700 antialiased overflow-x-hidden bg-white max-w-[100vw]">
     <!-- Navigation -->
     <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/90 backdrop-blur-md border-b border-transparent">
-        <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
             <div class="flex items-center justify-between">
                 <a href="#home" class="font-display text-2xl font-bold text-gray-900 tracking-tight">
                     Regan<span class="text-primary-500">.</span>
@@ -167,100 +200,100 @@
                 </button>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
-            <div class="px-6 py-4 flex flex-col gap-4">
-                <a href="#home" class="text-gray-600 hover:text-gray-900 transition">Home</a>
-                <a href="#about" class="text-gray-600 hover:text-gray-900 transition">About</a>
-                <a href="#skills" class="text-gray-600 hover:text-gray-900 transition">Skills</a>
-                <a href="#projects" class="text-gray-600 hover:text-gray-900 transition">Projects</a>
-                <a href="#services" class="text-gray-600 hover:text-gray-900 transition">Services</a>
-                <a href="#contact" class="text-gray-600 hover:text-gray-900 transition">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg">
+            <div class="px-4 py-3 flex flex-col">
+                <a href="#home" class="text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition py-3 px-3 rounded-lg font-medium">Home</a>
+                <a href="#about" class="text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition py-3 px-3 rounded-lg font-medium">About</a>
+                <a href="#skills" class="text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition py-3 px-3 rounded-lg font-medium">Skills</a>
+                <a href="#projects" class="text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition py-3 px-3 rounded-lg font-medium">Projects</a>
+                <a href="#services" class="text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition py-3 px-3 rounded-lg font-medium">Services</a>
+                <a href="#contact" class="text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition py-3 px-3 rounded-lg font-medium">Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-primary-50/50 to-white">
-        <canvas id="particles-canvas"></canvas>
+    <section id="home" class="relative min-h-[100svh] flex items-center justify-center overflow-x-hidden bg-gradient-to-b from-primary-50/50 to-white">
+        <canvas id="particles-canvas" style="max-width:100vw;"></canvas>
         
-        <div class="relative z-10 max-w-7xl mx-auto px-6 py-32 text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-primary-100 text-sm text-primary-700 mb-8 shadow-sm animate-fade-in">
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28 md:py-32 text-center w-full max-w-full overflow-x-hidden">
+            <div class="availability-badge inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-white border border-primary-100 text-xs sm:text-sm text-primary-700 mb-6 sm:mb-8 shadow-sm animate-fade-in max-w-[95%] mx-auto">
                 <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                 Available for freelance & full-time opportunities
             </div>
-            <h1 class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-gray-900 leading-tight mb-6 animate-slide-up">
+            <h1 class="hero-title font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 leading-tight mb-4 sm:mb-6 animate-slide-up px-3 break-words">
                 Hi, I'm <span class="gradient-text">Regan</span>
             </h1>
-            <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-4 animate-slide-up" style="animation-delay: 0.1s">
-                Full Stack Software Engineer & Entrepreneur
+            <p class="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-3 sm:mb-4 animate-slide-up px-2" style="animation-delay: 0.1s">
+                Full Stack Software Engineer
             </p>
-            <p class="text-lg text-gray-500 max-w-2xl mx-auto mb-10 animate-slide-up" style="animation-delay: 0.2s">
+            <p class="hero-desc text-base sm:text-lg text-gray-500 max-w-xl sm:max-w-2xl mx-auto mb-8 sm:mb-10 animate-slide-up px-3 leading-relaxed break-words" style="animation-delay: 0.2s">
                 Building scalable web applications, cloud infrastructure, and delivering end-to-end IT solutions that drive business growth.
             </p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up" style="animation-delay: 0.3s">
-                <a href="#projects" class="px-8 py-3.5 rounded-full bg-primary-500 hover:bg-primary-600 text-white font-semibold transition shadow-lg shadow-primary-500/25 flex items-center gap-2">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 animate-slide-up w-full max-w-sm sm:max-w-none mx-auto px-4" style="animation-delay: 0.3s">
+                <a href="#projects" class="w-full sm:w-auto justify-center px-8 py-3.5 rounded-full bg-primary-500 hover:bg-primary-600 text-white font-semibold transition shadow-lg shadow-primary-500/25 flex items-center gap-2">
                     View My Work
                     <i class="fas fa-arrow-down text-sm"></i>
                 </a>
-                <a href="#contact" class="px-8 py-3.5 rounded-full bg-white border border-gray-200 hover:border-primary-300 hover:bg-primary-50 text-gray-800 font-semibold transition flex items-center gap-2 shadow-sm">
+                <a href="#contact" class="w-full sm:w-auto justify-center px-8 py-3.5 rounded-full bg-white border border-gray-200 hover:border-primary-300 hover:bg-primary-50 text-gray-800 font-semibold transition flex items-center gap-2 shadow-sm">
                     Get In Touch
                     <i class="fas fa-paper-plane text-sm"></i>
                 </a>
             </div>
 
             <!-- Social Icons -->
-            <div class="mt-12 flex items-center justify-center gap-8 text-gray-400 animate-slide-up" style="animation-delay: 0.4s">
-                <a href="https://github.com/Regan-Mremi" target="_blank" class="hover:text-primary-600 transition text-2xl"><i class="fab fa-github"></i></a>
+            <div class="mt-8 sm:mt-12 flex items-center justify-center gap-6 sm:gap-8 text-gray-400 animate-slide-up" style="animation-delay: 0.4s">
+                <a href="https://github.com" target="_blank" class="hover:text-primary-600 transition text-2xl"><i class="fab fa-github"></i></a>
                 <a href="https://linkedin.com" target="_blank" class="hover:text-primary-600 transition text-2xl"><i class="fab fa-linkedin"></i></a>
                 <a href="https://twitter.com" target="_blank" class="hover:text-primary-600 transition text-2xl"><i class="fab fa-x-twitter"></i></a>
-                <a href="mailto:reganrichard027@gmail.com" class="hover:text-primary-600 transition text-2xl"><i class="fas fa-envelope"></i></a>
+                <a href="mailto:regan@example.com" class="hover:text-primary-600 transition text-2xl"><i class="fas fa-envelope"></i></a>
             </div>
 
             <!-- Trusted Companies Marquee (right after social icons) -->
-            <div class="mt-16 animate-slide-up" style="animation-delay: 0.5s">
+            <div class="mt-10 sm:mt-16 animate-slide-up w-full overflow-hidden" style="animation-delay: 0.5s">
                 <p class="text-sm text-gray-400 uppercase tracking-wider mb-6 font-medium">Trusted by</p>
                 <div class="marquee-container">
                     <div class="marquee-track">
                         <!-- Set 1 -->
                         <div class="flex items-center">
                             <div class="logo-item">
-                                <img src="images/gwambinapr.webp" alt="Gwambina Group Limited" class="client-logo-img" style="height:52px;max-width:140px;">
+                                <img src="images/gwambinapr.webp" alt="Gwambina Group Limited" class="client-logo-img" style="height:auto;max-height:44px;max-width:110px;">
                             </div>
                             <div class="logo-item" style="background:#111;border-radius:0.75rem;">
-                                <img src="images/amell.webp" alt="Amell" class="client-logo-img" style="height:36px;max-width:130px;">
+                                <img src="images/amell.webp" alt="Amell" class="client-logo-img" style="height:auto;max-height:32px;max-width:110px;">
                             </div>
                             <div class="logo-item">
-                                <img src="images/lush.webp" alt="Lush Garden Hotel" class="client-logo-img" style="height:48px;max-width:150px;">
+                                <img src="images/lush.webp" alt="Lush Garden Hotel" class="client-logo-img" style="height:auto;max-height:40px;max-width:120px;">
                             </div>
                             <div class="logo-item">
-                                <img src="images/radio.webp" alt="Safina Radio" class="client-logo-img" style="height:56px;max-width:140px;">
+                                <img src="images/radio.webp" alt="Safina Radio" class="client-logo-img" style="height:auto;max-height:48px;max-width:110px;">
                             </div>
                             <div class="logo-item">
-                                <img src="images/logo.png" alt="SYWSO" class="client-logo-img" style="height:56px;max-width:140px;">
+                                <img src="images/logo.png" alt="SYWSO" class="client-logo-img" style="height:auto;max-height:48px;max-width:110px;">
                             </div>
                             <div class="logo-item">
-                                <img src="images/tut-logo.png" alt="T.U.T LTD" class="client-logo-img" style="height:40px;max-width:150px;">
+                                <img src="images/tut-logo.png" alt="T.U.T LTD" class="client-logo-img" style="height:auto;max-height:36px;max-width:120px;">
                             </div>
                         </div>
                         <!-- Set 2 (duplicate for seamless loop) -->
                         <div class="flex items-center">
                             <div class="logo-item">
-                                <img src="images/gwambinapr.webp" alt="Gwambina Group Limited" class="client-logo-img" style="height:52px;max-width:140px;">
+                                <img src="images/gwambinapr.webp" alt="Gwambina Group Limited" class="client-logo-img" style="height:auto;max-height:44px;max-width:110px;">
                             </div>
                             <div class="logo-item" style="background:#111;border-radius:0.75rem;">
-                                <img src="images/amell.webp" alt="Amell" class="client-logo-img" style="height:36px;max-width:130px;">
+                                <img src="images/amell.webp" alt="Amell" class="client-logo-img" style="height:auto;max-height:32px;max-width:110px;">
                             </div>
                             <div class="logo-item">
-                                <img src="images/lush.webp" alt="Lush Garden Hotel" class="client-logo-img" style="height:48px;max-width:150px;">
+                                <img src="images/lush.webp" alt="Lush Garden Hotel" class="client-logo-img" style="height:auto;max-height:40px;max-width:120px;">
                             </div>
                             <div class="logo-item">
-                                <img src="images/radio.webp" alt="Safina Radio" class="client-logo-img" style="height:56px;max-width:140px;">
+                                <img src="images/radio.webp" alt="Safina Radio" class="client-logo-img" style="height:auto;max-height:48px;max-width:110px;">
                             </div>
                             <div class="logo-item">
-                                <img src="images/logo.png" alt="SYWSO" class="client-logo-img" style="height:56px;max-width:140px;">
+                                <img src="images/logo.png" alt="SYWSO" class="client-logo-img" style="height:auto;max-height:48px;max-width:110px;">
                             </div>
                             <div class="logo-item">
-                                <img src="images/tut-logo.png" alt="T.U.T LTD" class="client-logo-img" style="height:40px;max-width:150px;">
+                                <img src="images/tut-logo.png" alt="T.U.T LTD" class="client-logo-img" style="height:auto;max-height:36px;max-width:120px;">
                             </div>
                         </div>
                     </div>
@@ -274,11 +307,11 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-24 relative bg-white">
+    <section id="about" class="py-16 sm:py-24 relative bg-white">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <div>
-                    <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
                         About <span class="gradient-text">Me</span>
                     </h2>
                     <p class="text-gray-600 text-lg leading-relaxed mb-6">
@@ -290,21 +323,21 @@
                     <p class="text-gray-600 text-lg leading-relaxed mb-8">
                         Whether you need a custom SaaS platform, a high-performance e-commerce site, cloud migration, or strategic IT guidance, I bring technical excellence and a business-focused mindset to every project.
                     </p>
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6">
                         <div class="text-center p-4 rounded-xl bg-primary-50">
-                            <div class="text-3xl font-bold text-primary-600 mb-1">4+</div>
+                            <div class="text-2xl sm:text-3xl font-bold text-primary-600 mb-1">6+</div>
                             <div class="text-sm text-gray-500">Years Exp.</div>
                         </div>
                         <div class="text-center p-4 rounded-xl bg-primary-50">
-                            <div class="text-3xl font-bold text-primary-600 mb-1">7+</div>
+                            <div class="text-2xl sm:text-3xl font-bold text-primary-600 mb-1">50+</div>
                             <div class="text-sm text-gray-500">Projects</div>
                         </div>
                         <div class="text-center p-4 rounded-xl bg-primary-50">
-                            <div class="text-3xl font-bold text-primary-600 mb-1">10+</div>
+                            <div class="text-2xl sm:text-3xl font-bold text-primary-600 mb-1">30+</div>
                             <div class="text-sm text-gray-500">Happy Clients</div>
                         </div>
                         <div class="text-center p-4 rounded-xl bg-primary-50">
-                            <div class="text-3xl font-bold text-primary-600 mb-1">15+</div>
+                            <div class="text-2xl sm:text-3xl font-bold text-primary-600 mb-1">15+</div>
                             <div class="text-sm text-gray-500">Technologies</div>
                         </div>
                     </div>
@@ -358,10 +391,10 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-24 relative bg-gray-50">
+    <section id="skills" class="py-16 sm:py-24 relative bg-gray-50">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
                     Technical <span class="gradient-text">Skills</span>
                 </h2>
                 <p class="text-gray-500 text-lg max-w-2xl mx-auto">
@@ -369,7 +402,7 @@
                 </p>
             </div>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
                 <div class="card rounded-2xl p-6">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
@@ -384,7 +417,7 @@
                         <span class="px-3 py-1.5 rounded-full bg-gray-100 text-sm text-gray-700">Tailwind CSS</span>
                         <span class="px-3 py-1.5 rounded-full bg-gray-100 text-sm text-gray-700">Vue.js</span>
                         <span class="px-3 py-1.5 rounded-full bg-gray-100 text-sm text-gray-700">HTML/CSS</span>
-                        <span class="px-3 py-1.5 rounded-full bg-gray-100 text-sm text-gray-700">Flutter</span>
+                        <span class="px-3 py-1.5 rounded-full bg-gray-100 text-sm text-gray-700">Framer Motion</span>
                     </div>
                 </div>
                 
@@ -418,7 +451,7 @@
                         <span class="px-3 py-1.5 rounded-full bg-gray-100 text-sm text-gray-700">MongoDB</span>
                         <span class="px-3 py-1.5 rounded-full bg-gray-100 text-sm text-gray-700">Redis</span>
                         <span class="px-3 py-1.5 rounded-full bg-gray-100 text-sm text-gray-700">MySQL</span>
-                        <span class="px-3 py-1.5 rounded-full bg-gray-100 text-sm text-gray-700">Supabase</span>
+                        <span class="px-3 py-1.5 rounded-full bg-gray-100 text-sm text-gray-700">Prisma</span>
                         <span class="px-3 py-1.5 rounded-full bg-gray-100 text-sm text-gray-700">Firebase</span>
                     </div>
                 </div>
@@ -473,32 +506,15 @@
                         <span class="px-3 py-1.5 rounded-full bg-gray-100 text-sm text-gray-700">Mentoring</span>
                     </div>
                 </div>
-
- <div class="card rounded-2xl p-6">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="w-12 h-12 rounded-xl bg-cyan-100 flex items-center justify-center">
-                            <i class="fas fa-users text-cyan-600 text-xl"></i>
-                        </div>
-                        <h3 class="font-display text-xl font-semibold text-gray-900">Other Skills</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1.5 rounded-full bg-gray-100 text-sm text-gray-700">Networking</span>
-                        <span class="px-3 py-1.5 rounded-full bg-gray-100 text-sm text-gray-700">Cybersecurity</span>
-                        <span class="px-3 py-1.5 rounded-full bg-gray-100 text-sm text-gray-700">CCTV Monitor & Installation</span>
-             
-                    </div>
-                </div>
-
-
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-24 relative bg-white">
+    <section id="projects" class="py-16 sm:py-24 relative bg-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
                     Featured <span class="gradient-text">Projects</span>
                 </h2>
                 <p class="text-gray-500 text-lg max-w-2xl mx-auto">
@@ -506,13 +522,13 @@
                 </p>
             </div>
             
-            <div class="grid md:grid-cols-2 gap-8">
+            <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
                 <!-- Project 1 -->
                 <div class="group card rounded-2xl overflow-hidden">
-                    <div class="h-52 relative overflow-hidden bg-gray-100">
-                        <img src="https://www.vocso.com/blog/wp-content/uploads/2022/02/eCommerce-Website-Features-1920-x-1080.jpg" alt="NexusCommerce Platform" class="project-img">
+                    <div class="h-44 sm:h-52 relative overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80" alt="NexusCommerce Platform" class="project-img">
                         <div class="absolute inset-0 bg-gray-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-4">
-                            <a href="https://hukeaz.vercel.app/" class="w-12 h-12 rounded-full bg-white/90 hover:bg-primary-500 hover:text-white flex items-center justify-center text-gray-800 transition">
+                            <a href="#" class="w-12 h-12 rounded-full bg-white/90 hover:bg-primary-500 hover:text-white flex items-center justify-center text-gray-800 transition">
                                 <i class="fas fa-external-link-alt"></i>
                             </a>
                             <a href="#" class="w-12 h-12 rounded-full bg-white/90 hover:bg-primary-500 hover:text-white flex items-center justify-center text-gray-800 transition">
@@ -527,20 +543,22 @@
                             <span class="text-xs px-2.5 py-1 rounded-full bg-primary-50 text-primary-700">PostgreSQL</span>
                             <span class="text-xs px-2.5 py-1 rounded-full bg-primary-50 text-primary-700">Stripe</span>
                         </div>
-                        <h3 class="font-display text-xl font-semibold text-gray-900 mb-2">Hukeaz Shooping</h3>
+                        <h3 class="font-display text-xl font-semibold text-gray-900 mb-2">NexusCommerce Platform</h3>
                         <p class="text-gray-500 text-sm leading-relaxed mb-4">
-                           Developed an e-commerce web application that combines online beauty shopping with hair and beauty service booking. Customers can browse and purchase cosmetics, explore available services, and book appointments through one platform, creating a convenient digital experience for both shopping and salon services.
+                            Full-featured multi-vendor e-commerce platform with real-time inventory, payment processing, admin analytics dashboard, and seller portals. Handles 10k+ daily transactions.
                         </p>
-                        
+                        <div class="flex items-center text-primary-600 text-sm font-medium">
+                            View Case Study <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Project 2 -->
                 <div class="group card rounded-2xl overflow-hidden">
-                    <div class="h-52 relative overflow-hidden bg-gray-100">
-                        <img src="https://github.com/Regan-Mremi/Gwambina/blob/main/assets/community7.jpg?raw=true" alt="FlowSync SaaS" class="project-img">
+                    <div class="h-44 sm:h-52 relative overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&q=80" alt="FlowSync SaaS" class="project-img">
                         <div class="absolute inset-0 bg-gray-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-4">
-                            <a href="https://www.gwambina.co.tz/" class="w-12 h-12 rounded-full bg-white/90 hover:bg-primary-500 hover:text-white flex items-center justify-center text-gray-800 transition">
+                            <a href="#" class="w-12 h-12 rounded-full bg-white/90 hover:bg-primary-500 hover:text-white flex items-center justify-center text-gray-800 transition">
                                 <i class="fas fa-external-link-alt"></i>
                             </a>
                             <a href="#" class="w-12 h-12 rounded-full bg-white/90 hover:bg-primary-500 hover:text-white flex items-center justify-center text-gray-800 transition">
@@ -555,20 +573,22 @@
                             <span class="text-xs px-2.5 py-1 rounded-full bg-cyan-50 text-cyan-700">MongoDB</span>
                             <span class="text-xs px-2.5 py-1 rounded-full bg-cyan-50 text-cyan-700">WebSockets</span>
                         </div>
-                        <h3 class="font-display text-xl font-semibold text-gray-900 mb-2">Gwambina Group Limited</h3>
+                        <h3 class="font-display text-xl font-semibold text-gray-900 mb-2">FlowSync — Project Management SaaS</h3>
                         <p class="text-gray-500 text-sm leading-relaxed mb-4">
-                            Designed and developed a professional corporate website for Gwambina Group to showcase its services, projects, industries served, and company information. The website was built with a focus on modern presentation, responsive design, user experience, and improved online visibility.
+                            Collaborative project management tool with real-time updates, kanban boards, time tracking, team chat, and advanced reporting. Used by 200+ teams.
                         </p>
-                         
+                        <div class="flex items-center text-primary-600 text-sm font-medium">
+                            View Case Study <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Project 3 -->
                 <div class="group card rounded-2xl overflow-hidden">
-                    <div class="h-52 relative overflow-hidden bg-gray-100">
-                        <img src="https://i.pinimg.com/736x/3c/e5/11/3ce511400a92c519af55c17586e7949c.jpg" alt="PulseMonitor Dashboard" class="project-img">
+                    <div class="h-44 sm:h-52 relative overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="PulseMonitor Dashboard" class="project-img">
                         <div class="absolute inset-0 bg-gray-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-4">
-                            <a href="https://amell-app.vercel.app/" class="w-12 h-12 rounded-full bg-white/90 hover:bg-primary-500 hover:text-white flex items-center justify-center text-gray-800 transition">
+                            <a href="#" class="w-12 h-12 rounded-full bg-white/90 hover:bg-primary-500 hover:text-white flex items-center justify-center text-gray-800 transition">
                                 <i class="fas fa-external-link-alt"></i>
                             </a>
                             <a href="#" class="w-12 h-12 rounded-full bg-white/90 hover:bg-primary-500 hover:text-white flex items-center justify-center text-gray-800 transition">
@@ -583,18 +603,20 @@
                             <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700">PostgreSQL</span>
                             <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700">AWS</span>
                         </div>
-                        <h3 class="font-display text-xl font-semibold text-gray-900 mb-2">Amell in Dar </h3>
+                        <h3 class="font-display text-xl font-semibold text-gray-900 mb-2">PulseMonitor — IT Infrastructure Dashboard</h3>
                         <p class="text-gray-500 text-sm leading-relaxed mb-4">
-                            Developed a user-friendly web application for Amell in Dar that allows customers to explore the restaurant, view menus, discover available experiences, and make reservations online. The project was designed to improve the customer experience and make booking more convenient and accessible.
+                            Real-time monitoring and alerting platform for servers, networks, and applications. Features custom metrics, anomaly detection, and automated incident response.
                         </p>
-                        
+                        <div class="flex items-center text-primary-600 text-sm font-medium">
+                            View Case Study <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Project 4 -->
                 <div class="group card rounded-2xl overflow-hidden">
-                    <div class="h-52 relative overflow-hidden bg-gray-100">
-                        <img src="https://i.pinimg.com/736x/bb/6c/47/bb6c47c579002e1a4733f48ad0272c9b.jpg" alt="MediConnect Healthcare" class="project-img">
+                    <div class="h-44 sm:h-52 relative overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80" alt="MediConnect Healthcare" class="project-img">
                         <div class="absolute inset-0 bg-gray-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-4">
                             <a href="#" class="w-12 h-12 rounded-full bg-white/90 hover:bg-primary-500 hover:text-white flex items-center justify-center text-gray-800 transition">
                                 <i class="fas fa-external-link-alt"></i>
@@ -611,11 +633,13 @@
                             <span class="text-xs px-2.5 py-1 rounded-full bg-orange-50 text-orange-700">MongoDB</span>
                             <span class="text-xs px-2.5 py-1 rounded-full bg-orange-50 text-orange-700">HIPAA</span>
                         </div>
-                        <h3 class="font-display text-xl font-semibold text-gray-900 mb-2">Ajivora</h3>
+                        <h3 class="font-display text-xl font-semibold text-gray-900 mb-2">MediConnect — Healthcare Portal</h3>
                         <p class="text-gray-500 text-sm leading-relaxed mb-4">
-                           Developed an HR-focused ERP system designed to help businesses manage their workforce and daily human resource operations digitally. The system brings key HR functions into one platform, including employee management, attendance, leave management, and HR records, helping organizations streamline processes and reduce manual work.
+                            Secure patient-doctor communication platform with appointment scheduling, medical records, telemedicine video, and prescription management. Fully HIPAA-compliant.
                         </p>
-                        
+                        <div class="flex items-center text-primary-600 text-sm font-medium">
+                            View Case Study <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -631,10 +655,10 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-24 relative bg-gray-50">
+    <section id="services" class="py-16 sm:py-24 relative bg-gray-50">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
                     IT <span class="gradient-text">Services</span>
                 </h2>
                 <p class="text-gray-500 text-lg max-w-2xl mx-auto">
@@ -642,7 +666,7 @@
                 </p>
             </div>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
                 <div class="card rounded-2xl p-8 group">
                     <div class="w-14 h-14 rounded-2xl bg-primary-100 flex items-center justify-center mb-6 group-hover:scale-110 transition">
                         <i class="fas fa-globe text-2xl text-primary-600"></i>
@@ -707,10 +731,10 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-24 relative bg-gradient-to-b from-gray-50 to-white">
+    <section id="contact" class="py-16 sm:py-24 relative bg-gradient-to-b from-gray-50 to-white">
         <div class="max-w-4xl mx-auto px-6 relative z-10">
             <div class="text-center mb-12">
-                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
                     Let's Build Something <span class="gradient-text">Great</span>
                 </h2>
                 <p class="text-gray-500 text-lg">
@@ -718,7 +742,7 @@
                 </p>
             </div>
             
-            <div class="card rounded-2xl p-8 md:p-12">
+            <div class="card rounded-2xl p-5 sm:p-8 md:p-12">
                 <form id="contact-form" class="space-y-6">
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
@@ -747,12 +771,7 @@
                 <div class="mt-10 pt-8 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-6">
                     <div class="text-center sm:text-left">
                         <p class="text-gray-500 text-sm mb-1">Prefer email?</p>
-                         <a href="mailto:regan.dev@example.com" class="text-primary-600 hover:text-primary-700 font-medium">reganrichard027@gmail.com</a>
-                       
-                          <div class="text-center sm:text-left">
-                        <p class="text-gray-500 text-sm mb-1">Phone No:</p>
-                          
-                        <a href="mailto:regan.dev@example.com" class="text-primary-600 hover:text-primary-700 font-medium">+255 795 827 885 </a>
+                        <a href="mailto:regan.dev@example.com" class="text-primary-600 hover:text-primary-700 font-medium">regan.dev@example.com</a>
                     </div>
                     <div class="flex items-center gap-6">
                         <a href="https://github.com" target="_blank" class="text-gray-400 hover:text-primary-600 transition text-xl"><i class="fab fa-github"></i></a>
@@ -765,8 +784,8 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-10 border-t border-gray-100 bg-white">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+    <footer class="py-8 sm:py-10 border-t border-gray-100 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4 text-center md:text-left">
             <div class="font-display text-xl font-bold text-gray-900">
                 Regan<span class="text-primary-500">.</span>
             </div>
